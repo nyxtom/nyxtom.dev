@@ -11,28 +11,32 @@ pub fn configure(app: &mut tide::Server<()>) {
     app.at("/posts/:year/:month/:day/:id").get(get_post);
 }
 
-async fn render_markdown(url: &str, template: &str) -> tide::Result<Response> {
+async fn render_markdown(url: &str) -> tide::Result<Response> {
     let post = Post::from_file(url).await?;
-    // render template with content
-    REGISTRY.with(|c| c.render(template, &json!(post)))
+    REGISTRY.with(|c| c.render("post.html", &json!(post)))
 }
 
-async fn index(_req: Request<()>) -> tide::Result<Response> {
-    render_markdown("posts/index.md", "post.html").await
-}
-
+// Returns a simple 200 OK response
 async fn health_check(_req: Request<()>) -> tide::Result<Response> {
     Ok(Response::new(StatusCode::Ok))
 }
 
+/// Renders the index markdown root file
+async fn index(_req: Request<()>) -> tide::Result<Response> {
+    render_markdown("posts/index.md").await
+}
+
+/// Renders the about markdown root file
 async fn about(_req: Request<()>) -> tide::Result<Response> {
-    render_markdown("posts/about.md", "post.html").await
+    render_markdown("posts/about.md").await
 }
 
+/// Renders the todo markdown root file
 async fn todo(_req: Request<()>) -> tide::Result<Response> {
-    render_markdown("posts/todo.md", "post.html").await
+    render_markdown("posts/todo.md").await
 }
 
+/// Renders a post based on the given path
 async fn get_post(req: Request<()>) -> tide::Result<Response> {
     // open up file based on request (fallback to not found)
     let url = format!(
@@ -43,5 +47,5 @@ async fn get_post(req: Request<()>) -> tide::Result<Response> {
         req.param("id")?
     );
 
-    render_markdown(&url, "post.html").await
+    render_markdown(&url).await
 }
