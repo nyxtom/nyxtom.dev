@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    a {
+        @apply hover:text-gray-500;
+    }
+    .prose pre {
+        padding: 0px;
+        background: none;
+        @apply border-t-2 border-t-gray-50 rounded-md block shadow-md;
+    }
+    .prose code .hljs-punctuation {
+        @apply font-bold text-white;
+    }
+    .prose code .hljs-tag .hljs-attr,
+    .prose code .hljs-tag .hljs-name {
+        color: #fff;
+    }
+    .prose img {
+        @apply border-t-2 border-t-gray-50 rounded-lg block shadow-lg;
+    }
+}
