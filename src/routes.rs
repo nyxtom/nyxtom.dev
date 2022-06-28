@@ -1,5 +1,6 @@
 use serde_json::json;
 use tide::{Request, Response, StatusCode};
+use tracing::Instrument;
 
 use crate::{post::Post, registry::REGISTRY};
 
@@ -47,5 +48,6 @@ async fn get_post(req: Request<()>) -> tide::Result<Response> {
         req.param("id")?
     );
 
-    render_markdown(&url).await
+    let span = tracing::info_span!("rendering markdown");
+    render_markdown(&url).instrument(span).await
 }

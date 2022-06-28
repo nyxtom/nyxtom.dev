@@ -35,6 +35,7 @@ impl State {
     /// ```
     pub fn render<T: Serialize>(&self, name: &str, data: &T) -> tide::Result<Response> {
         let mut response = Response::new(200);
+        tracing::info!("rendering template {}", name);
         self.render_body(&mut response, name, data);
         Ok(response)
     }

@@ -20,6 +20,7 @@ impl Post {
 
     pub async fn from_file(path: &str) -> Result<Self> {
         // open markdown file and read to string
+        tracing::info!("reading markdown file path {}", path);
         let url = path.strip_suffix(".md").unwrap();
         let mut md_file = File::open(path).await?;
         let mut buf = String::new();
@@ -34,6 +35,7 @@ impl Post {
             let vars = results.pop_front().unwrap();
             let content = results.pop_front().unwrap();
 
+            tracing::info!("variables declared in markdown {}", vars);
             for line in vars.lines() {
                 let (k, v) = line.split_once(":").unwrap();
                 let v = String::from(v.trim());
@@ -49,6 +51,7 @@ impl Post {
         }
 
         // convert markdown file to html
+        tracing::debug!("parsing markdown into html {}", post.content);
         let mut options = pulldown_cmark::Options::empty();
         options.insert(pulldown_cmark::Options::ENABLE_HEADING_ATTRIBUTES);
         let parser = pulldown_cmark::Parser::new_ext(&post.content, options);
