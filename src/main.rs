@@ -8,7 +8,7 @@ use tide::utils::After;
 #[async_std::main]
 async fn main() -> std::io::Result<()> {
     let mut app = tide::new();
-    tide::log::start();
+    env_logger::init();
 
     // serve static files
     app.at("/static").serve_dir("client/dist")?;
@@ -20,6 +20,8 @@ async fn main() -> std::io::Result<()> {
     routes::configure(&mut app);
 
     // listen and await
-    app.listen("127.0.0.1:1234").await?;
+    let host = option_env!("HOST").unwrap_or("0.0.0.0");
+    let port = option_env!("PORT").unwrap_or("7000");
+    app.listen(format!("{}:{}", host, port)).await?;
     Ok(())
 }
