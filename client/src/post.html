@@ -17,8 +17,6 @@
             <h1 class="flex-initial font-medium"><a href="/" class="text-slate-800">Tom's Notes 🏕</a></h1>
             {{#if slug}}
             <span class="pl-4 pr-4">/</span>
-            <a href="/">posts</a>
-            <span class="pl-4 pr-4">/</span>
             <a href="/{{url}}">{{slug}}</a>
             {{/if}}
             <div class="flex-1"></div>
@@ -27,6 +25,9 @@
             <a href="/todo">todo!</a>
         </nav>
         <article class="p-4 my-16 prose lg:prose-l max-w-full">
+            {{#unless hide_title}}
+            <h1>{{title}}</h1>
+            {{/unless}}
             {{{content}}}
         </article>
     </div>

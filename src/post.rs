@@ -7,6 +7,7 @@ pub struct Post {
     slug: String,
     url: String,
     title: String,
+    hide_title: bool,
     description: String,
     content: String,
 }
@@ -27,9 +28,11 @@ impl Post {
         md_file.read_to_string(&mut buf).await?;
 
         let mut post = Post::new();
-        post.slug = String::from(url.strip_prefix("posts/").unwrap());
-        post.url = String::from(url.replace('-', "/"));
+        let slug = url.trim_start_matches("content/posts/");
+        post.slug = String::from(slug);
+        post.url = String::from(post.slug.replacen('-', "/", 3));
         post.content = buf;
+        tracing::info!("creating post with slug {}, url: {}", post.slug, post.url);
 
         if post.content.starts_with("---\n") {
             let mut results: VecDeque<&str> = post.content.splitn(3, "---\n").skip(1).collect();
@@ -44,6 +47,7 @@ impl Post {
                     "title" => post.title = v,
                     "description" => post.description = v,
                     "slug" => post.slug = v,
+                    "hide_title" => post.hide_title = true,
                     _ => {}
                 };
             }

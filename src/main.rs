@@ -18,7 +18,7 @@ async fn main() -> std::io::Result<()> {
 
     // serve static files
     app.at("/static").serve_dir("client/dist")?;
-    app.at("/assets").serve_dir("posts/assets")?;
+    app.at("/assets").serve_dir("content/assets")?;
     app.at("/favicon.ico").serve_file("favicon.ico")?;
 
     // app.with(tide::log::LogMiddleware::new());

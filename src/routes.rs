@@ -9,7 +9,8 @@ pub fn configure(app: &mut tide::Server<()>) {
     app.at("/health_check").get(health_check);
     app.at("/about").get(about);
     app.at("/todo").get(todo);
-    app.at("/posts/:year/:month/:day/:id").get(get_post);
+    app.at("/:year/:month/:day/:id").get(get_post);
+    app.at("/:year/:month/:day/:id/").get(get_post);
 }
 
 async fn render_markdown(url: &str) -> tide::Result<Response> {
