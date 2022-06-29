@@ -1,6 +1,6 @@
 ---
 title: Tom's Notes
-description: Writing a markdown blog in Rust with tide, async-std, pulldown-cmark and tailwindcss.
+description:
 slug:
 hide_title: true
 ---
