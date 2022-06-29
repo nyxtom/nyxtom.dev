@@ -1,0 +1,22 @@
+name: nyxtom-dev-markdown-blog-rust
+region: nyc
+services:
+- dockerfile_path: Dockerfile
+  envs:
+  - key: RUST_LOG
+    scope: RUN_AND_BUILD_TIME
+    value: info
+  - key: PORT
+    scope: RUN_AND_BUILD_TIME
+    value: 8080
+  github:
+    branch: master
+    deploy_on_push: true
+    repo: nyxtom/nyxtom.dev
+  http_port: 8080
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  name: nyxtom-dev
+  routes:
+  - path: /
+  source_dir: /
