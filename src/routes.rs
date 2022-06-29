@@ -24,24 +24,24 @@ async fn health_check(_req: Request<()>) -> tide::Result<Response> {
 
 /// Renders the index markdown root file
 async fn index(_req: Request<()>) -> tide::Result<Response> {
-    render_markdown("posts/index.md").await
+    render_markdown("content/index.md").await
 }
 
 /// Renders the about markdown root file
 async fn about(_req: Request<()>) -> tide::Result<Response> {
-    render_markdown("posts/about.md").await
+    render_markdown("content/about.md").await
 }
 
 /// Renders the todo markdown root file
 async fn todo(_req: Request<()>) -> tide::Result<Response> {
-    render_markdown("posts/todo.md").await
+    render_markdown("content/todo.md").await
 }
 
 /// Renders a post based on the given path
 async fn get_post(req: Request<()>) -> tide::Result<Response> {
     // open up file based on request (fallback to not found)
     let url = format!(
-        "posts/{}/{}/{}/{}.md",
+        "content/posts/{}-{}-{}-{}.md",
         req.param("year")?,
         req.param("month")?,
         req.param("day")?,

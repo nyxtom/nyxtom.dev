@@ -27,7 +27,8 @@ impl Post {
         md_file.read_to_string(&mut buf).await?;
 
         let mut post = Post::new();
-        post.url = String::from(url);
+        post.slug = String::from(url.strip_prefix("posts/").unwrap());
+        post.url = String::from(url.replace('-', "/"));
         post.content = buf;
 
         if post.content.starts_with("---\n") {
