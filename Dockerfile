@@ -10,6 +10,7 @@ FROM rust:1.61.0 as runtime
 
 WORKDIR /app
 COPY --from=builder /app/target/release/notes notes
+COPY . .
 
 ENV RUST_LOG info
 ENV APP_ENVIRONMENT production
