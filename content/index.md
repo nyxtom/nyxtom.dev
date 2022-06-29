@@ -12,7 +12,7 @@ hide_title: true
     });
 </script>
 
-- [2022-06-26: Markdown Blog in Rust](/2022/06/26/tide)
+- [2022-06-26: Markdown Blog in Rust with Tide](/2022/06/26/tide)
 - [2021-07-06: React useEffect and useState](/2021/07/06/react-useEffect-useState)
 - [2021-07-05: React State and Inversion of Control](/2021/07/05/react-state)
 - [2020-10-08: Framebuffers, WGPU and Rust](/2020/10/08/framebuffers)
