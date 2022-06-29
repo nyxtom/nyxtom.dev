@@ -6,6 +6,16 @@
     a {
         @apply hover:text-gray-500;
     }
+    .prose h1 {
+        margin-bottom: 2em;
+    }
+    .prose h2, .prose h3 {
+        margin-top: 3em;
+    }
+    .prose h4 {
+        margin-top: 2.5em;
+        @apply italic;
+    }
     .prose pre {
         padding: 0px;
         background: none;

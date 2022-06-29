@@ -5,7 +5,7 @@ slug:
 hide_title: true
 ---
 <script type="text/javascript" src="/assets/packages/particles.js/particles.min.js"></script>
-<div id="particles-js" style="margin-top: -50px;height: 200px;">
+<div id="particles-js" style="margin-top: -80px;height: 250px;margin-bottom: 50px; margin-left:-4em; margin-right: -4em;">
 </div>
 <script type="text/javascript">
     particlesJS.load('particles-js', '/assets/packages/particles.js/particles.json', function() {
